@@ -34,7 +34,7 @@ export default function App() {
         <FlatList
           data={goals}
           renderItem={(item) => {
-            return <GoalItem item={item} />;
+            return <GoalItem item={item.item} />;
           }}
           keyExtractor={(item, index) => {
             return item;
