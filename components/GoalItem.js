@@ -1,7 +1,9 @@
-import { StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 
-function GoalItem({ item }) {
-  return <Text style={styles.goalText}>{item}</Text>;
+function GoalItem({ item, onPressAction }) {
+  return <Pressable onPress={onPressAction}>
+    <Text style={styles.goalText}>{item}</Text>
+  </Pressable>
 }
 
 export default GoalItem;

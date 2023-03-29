@@ -20,6 +20,10 @@ export default function App() {
       ...new Set([...currentGoals, goal]),
     ]);
   }
+
+  function onPress(params) {
+    console.log('on press')
+  }
   return (
 
     <View style={styles.container}>
@@ -34,7 +38,7 @@ export default function App() {
         <FlatList
           data={goals}
           renderItem={(item) => {
-            return <GoalItem item={item.item} />;
+            return <GoalItem item={item.item} onPressAction={onPress}/>;
           }}
           keyExtractor={(item, index) => {
             return item;
