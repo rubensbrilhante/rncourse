@@ -16,13 +16,18 @@ export default function App() {
   const [goals, setGoals] = useState([]);
 
   function addGoal(goal) {
+    console.log(goals)
     setGoals((currentGoals) => [
       ...new Set([...currentGoals, goal]),
     ]);
   }
 
-  function onPress(params) {
-    console.log('on press')
+  function onPress(goal) {
+    console.log('on press', goal)
+    setGoals((goals) => {
+      const filter = goals.filter(g => g !== goal)
+      return filter ? filter : []
+    })
   }
   return (
 
