@@ -14,6 +14,7 @@ import GoalItem from "./components/GoalItem";
 
 export default function App() {
   const [goals, setGoals] = useState([]);
+  const [isModalVisible, setModalVisible] = useState(false)
 
   function addGoal(goal) {
     console.log(goals)
@@ -29,28 +30,34 @@ export default function App() {
       return filter ? filter : []
     })
   }
-  return (
 
-    <View style={styles.container}>
+  const showModal = () => setModalVisible(true)
+  return (
+    <>
       <StatusBar
-        style="auto"
+        style="light"
+        translucent={false}
         networkActivityIndicatorVisible
-        backgroundColor="#F00"
+        backgroundColor="#5e0acc"
+
       />
-      <GoalInput addGoal={addGoal}/>
-      <View style={styles.goalsContainer}>
-        <Text style={styles.simpleText}>List of goals</Text>
-        <FlatList
-          data={goals}
-          renderItem={(item) => {
-            return <GoalItem item={item.item} onPressAction={onPress}/>;
-          }}
-          keyExtractor={(item, index) => {
-            return item;
-          }}
-        />
+      <View style={styles.container}>
+        <Button title="Add new goal" color="#5e0acc" onPress={showModal} />
+        <GoalInput addGoal={addGoal} isModalVisible={isModalVisible} setIsModalVisible={setModalVisible} />
+        <View style={styles.goalsContainer}>
+          <Text style={styles.simpleText}>List of goals</Text>
+          <FlatList
+            data={goals}
+            renderItem={(item) => {
+              return <GoalItem item={item.item} onPressAction={onPress} />;
+            }}
+            keyExtractor={(item, index) => {
+              return item;
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -58,10 +65,9 @@ const styles = StyleSheet.create({
   container: {
     overflow: "visible",
     flex: 1,
-    flexDirection: "column",
+    flexDirection: "column-reverse",
     justifyContent: "flex-start",
-    alignItems: "flex-start",
-    backgroundColor: "#eee",
+    alignItems: "stretch",
     margin: 12,
   },
 
@@ -72,10 +78,17 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "stretch",
     marginVertical: 8,
-    borderTopColor: "#000",
-    borderTopWidth: 1,
+    borderBottomColor: "#000",
+    borderBottomWidth: 1,
   },
 
 
-  simpleText: { marginTop: 12, width: "100%", height: "auto" },
+  simpleText: {
+    fontWeight: "bold",
+    marginVertical: 4,
+    borderBottomColor: "#000",
+    borderBottomWidth: 1,
+    width: "100%",
+    height: "auto"
+  },
 });
